@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Space-Themed Page</title>
+    <title>Cosmere Visualizer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
@@ -47,21 +47,29 @@
         </div>
     </section>
 
-    <!-- Responsive Buttons Section -->
-    <section class="py-12 bg-[var(--space-bg)]">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-2xl font-semibold mb-6 text-[var(--space-highlight)]">Categories</h2>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="networks/books.html" class="bg-[var(--space-highlight)] text-[var(--space-bg)] px-6 py-3 rounded hover:bg-[var(--space-accent)]">
-                    Books
-                </a>
-                <a href="people.html" class="bg-[var(--space-highlight)] text-[var(--space-bg)] px-6 py-3 rounded hover:bg-[var(--space-accent)]">
-                    People
-                </a>
-                <a href="higher_powers.html" class="bg-[var(--space-highlight)] text-[var(--space-bg)] px-6 py-3 rounded hover:bg-[var(--space-accent)]">
-                    Higher Powers
-                </a>
+    <!-- Dropdowns and Network Viewer -->
+    <section class="py-12 bg-[var(--space-bg)] text-center">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl font-semibold mb-6 text-[var(--space-highlight)]">Select a Network</h2>
+            <!-- Dropdowns -->
+            <div class="mb-6">
+                <label for="category" class="block text-lg mb-2">Category</label>
+                <select id="category" class="px-4 py-2 rounded bg-[var(--space-accent)] text-[var(--space-text)]">
+                    <option value="books">Books</option>
+                    <option value="people">People</option>
+                    <option value="higher_powers">Higher Powers</option>
+                </select>
             </div>
+            <div class="mb-6">
+                <label for="graph" class="block text-lg mb-2">Graph Name</label>
+                <select id="graph" class="px-4 py-2 rounded bg-[var(--space-accent)] text-[var(--space-text)]">
+                    <option value="Arcanum Unbounded">Arcanum Unbounded</option>
+                    <option value="Mistborn Era 1">Mistborn Era 1</option>
+                    <option value="Mistborn Era 2">Mistborn Era 2</option>
+                </select>
+            </div>
+            <!-- Network Viewer -->
+            <iframe id="networkFrame" class="w-full h-[600px] border-none bg-white" src=""></iframe>
         </div>
     </section>
 
@@ -69,10 +77,23 @@
     <script>
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
+        const categoryDropdown = document.getElementById('category');
+        const graphDropdown = document.getElementById('graph');
+        const networkFrame = document.getElementById('networkFrame');
 
         menuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
+
+        // Update iframe based on dropdown selections
+        function updateNetworkFrame() {
+            const category = categoryDropdown.value;
+            const graph = graphDropdown.value;
+            networkFrame.src = `networks/${category}_${graph}.html`;
+        }
+
+        categoryDropdown.addEventListener('change', updateNetworkFrame);
+        graphDropdown.addEventListener('change', updateNetworkFrame);
     </script>
 </body>
 </html>
