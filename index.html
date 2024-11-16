@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space-Themed Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --space-bg: #1a1a40;        /* Deep space purple */
+            --space-accent: #5b3e96;    /* Mid-tone purple */
+            --space-highlight: #9d7bdb; /* Light accent purple */
+            --space-text: #e4e4f5;      /* Soft white */
+        }
+    </style>
+</head>
+<body class="bg-[var(--space-bg)] text-[var(--space-text)]">
+    <!-- Navbar -->
+    <nav class="bg-[var(--space-accent)] text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="#" class="text-lg font-bold">Cosmere Visualizer</a>
+                <div class="hidden md:flex space-x-4">
+                    <a href="about.html" class="hover:text-[var(--space-highlight)]">About</a>
+                    <a href="contact.html" class="hover:text-[var(--space-highlight)]">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-white focus:outline-none">
+                        &#9776;
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden">
+                <a href="about.html" class="block py-2 hover:text-[var(--space-highlight)]">About</a>
+                <a href="contact.html" class="block py-2 hover:text-[var(--space-highlight)]">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Description Section -->
+    <section class="py-12 px-6 bg-[var(--space-accent)] text-[var(--space-text)]">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-3xl font-bold mb-4">A Home for my Notes</h1>
+            <p class="text-lg leading-7">
+                This is a personal project where I try to store my notes on the Cosmere universe in the form of network graphs. Between each link will contain notes and running theories, helping me keep track of everyone and everything as there are so many interconnected books.
+            </p>
+        </div>
+    </section>
+
+    <!-- Responsive Buttons Section -->
+    <section class="py-12 bg-[var(--space-bg)]">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-2xl font-semibold mb-6 text-[var(--space-highlight)]">Categories</h2>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="books.html" class="bg-[var(--space-highlight)] text-[var(--space-bg)] px-6 py-3 rounded hover:bg-[var(--space-accent)]">
+                    Books
+                </a>
+                <a href="people.html" class="bg-[var(--space-highlight)] text-[var(--space-bg)] px-6 py-3 rounded hover:bg-[var(--space-accent)]">
+                    People
+                </a>
+                <a href="higher_powers.html" class="bg-[var(--space-highlight)] text-[var(--space-bg)] px-6 py-3 rounded hover:bg-[var(--space-accent)]">
+                    Higher Powers
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Menu Toggle Script -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
