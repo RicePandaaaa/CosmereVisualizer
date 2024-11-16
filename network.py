@@ -2,22 +2,22 @@ from typing import List
 from pyvis.network import Network
 import os
 
-def create_network(terms: dict[str, List[str]], file_name: str):
+def create_network(terms: dict[str, List[str]], category_name: str):
     """ 
     Creates a network graph centered on the main term as a HTML file
     
     Args:
         terms (dict[str, List[str]]): Dictionary of main terms and their connected terms
-        file_name (str): Name of file to store network in
+        category_name (str): Name of category the network is classified as
 
     Returns:
         None
     """
 
-    # Set up base net
-    net = Network()
-
     for main_term in terms:
+         # Set up base net
+        net = Network()
+        
         # Create new center node
         net.add_node(n_id=main_term, label=main_term, color="#ff5733")
         sub_terms = terms[main_term]
@@ -27,8 +27,8 @@ def create_network(terms: dict[str, List[str]], file_name: str):
             net.add_node(n_id=sub_term, label=sub_term, color="#33cfff")
             net.add_edge(main_term, sub_term)
 
-    # Create the HTML file
-    net.write_html(f"networks/{file_name}.html")
+        # Create the HTML file
+        net.write_html(f"networks/{category_name}_{main_term}.html")
 
 
 # For generating the graphs
