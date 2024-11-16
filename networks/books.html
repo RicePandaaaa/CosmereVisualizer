@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 600px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#ff5733", "id": "Standalones", "label": "Standalones", "shape": "dot"}, {"color": "#33cfff", "id": "Elantris\n", "label": "Elantris\n", "shape": "dot"}, {"color": "#33cfff", "id": "Warbreaker\n", "label": "Warbreaker\n", "shape": "dot"}, {"color": "#33cfff", "id": "Tress of the Emerald Sea\n", "label": "Tress of the Emerald Sea\n", "shape": "dot"}, {"color": "#33cfff", "id": "Yumi and the Nightmare Painter\n", "label": "Yumi and the Nightmare Painter\n", "shape": "dot"}, {"color": "#33cfff", "id": "Sunlit main\n", "label": "Sunlit main\n", "shape": "dot"}, {"color": "#ff5733", "id": "Mistborn Era 1", "label": "Mistborn Era 1", "shape": "dot"}, {"color": "#33cfff", "id": "Final Empire\n", "label": "Final Empire\n", "shape": "dot"}, {"color": "#33cfff", "id": "Well of Ascension\n", "label": "Well of Ascension\n", "shape": "dot"}, {"color": "#33cfff", "id": "Hero of Ages\n", "label": "Hero of Ages\n", "shape": "dot"}, {"color": "#ff5733", "id": "Stormlight Archives", "label": "Stormlight Archives", "shape": "dot"}, {"color": "#33cfff", "id": "The Way of Kings\n", "label": "The Way of Kings\n", "shape": "dot"}, {"color": "#33cfff", "id": "Words of Radiance\n", "label": "Words of Radiance\n", "shape": "dot"}, {"color": "#33cfff", "id": "Edgedancer\n", "label": "Edgedancer\n", "shape": "dot"}, {"color": "#33cfff", "id": "Oathbringer\n", "label": "Oathbringer\n", "shape": "dot"}, {"color": "#33cfff", "id": "Dawnshard\n", "label": "Dawnshard\n", "shape": "dot"}, {"color": "#33cfff", "id": "Rhythm of Warbreaker\n", "label": "Rhythm of Warbreaker\n", "shape": "dot"}, {"color": "#ff5733", "id": "Mistborn Era 2", "label": "Mistborn Era 2", "shape": "dot"}, {"color": "#33cfff", "id": "The Alloy of Law\n", "label": "The Alloy of Law\n", "shape": "dot"}, {"color": "#33cfff", "id": "Shadows of Self\n", "label": "Shadows of Self\n", "shape": "dot"}, {"color": "#33cfff", "id": "The Bands of Mourning\n", "label": "The Bands of Mourning\n", "shape": "dot"}, {"color": "#33cfff", "id": "The Lost Metal\n", "label": "The Lost Metal\n", "shape": "dot"}, {"color": "#ff5733", "id": "Arcanum Unbounded", "label": "Arcanum Unbounded", "shape": "dot"}, {"color": "#33cfff", "id": "The Hope of Elantris\n", "label": "The Hope of Elantris\n", "shape": "dot"}, {"color": "#33cfff", "id": "The Eleventh Metal\n", "label": "The Eleventh Metal\n", "shape": "dot"}, {"color": "#33cfff", "id": "The Emperor\u0027s Soul\n", "label": "The Emperor\u0027s Soul\n", "shape": "dot"}, {"color": "#33cfff", "id": "Allomancer Jak and the Pits of Eltania\n", "label": "Allomancer Jak and the Pits of Eltania\n", "shape": "dot"}, {"color": "#33cfff", "id": "White Sand\n", "label": "White Sand\n", "shape": "dot"}, {"color": "#33cfff", "id": "Shadows for Silence in the Forests of Hell\n", "label": "Shadows for Silence in the Forests of Hell\n", "shape": "dot"}, {"color": "#33cfff", "id": "Sixth of Dusk\n", "label": "Sixth of Dusk\n", "shape": "dot"}, {"color": "#33cfff", "id": "Mistborn: Secret History", "label": "Mistborn: Secret History", "shape": "dot"}]);
+                  edges = new vis.DataSet([{"from": "Standalones", "to": "Elantris\n"}, {"from": "Standalones", "to": "Warbreaker\n"}, {"from": "Standalones", "to": "Tress of the Emerald Sea\n"}, {"from": "Standalones", "to": "Yumi and the Nightmare Painter\n"}, {"from": "Standalones", "to": "Sunlit main\n"}, {"from": "Mistborn Era 1", "to": "Final Empire\n"}, {"from": "Mistborn Era 1", "to": "Well of Ascension\n"}, {"from": "Mistborn Era 1", "to": "Hero of Ages\n"}, {"from": "Stormlight Archives", "to": "The Way of Kings\n"}, {"from": "Stormlight Archives", "to": "Words of Radiance\n"}, {"from": "Stormlight Archives", "to": "Edgedancer\n"}, {"from": "Stormlight Archives", "to": "Oathbringer\n"}, {"from": "Stormlight Archives", "to": "Dawnshard\n"}, {"from": "Stormlight Archives", "to": "Rhythm of Warbreaker\n"}, {"from": "Mistborn Era 2", "to": "The Alloy of Law\n"}, {"from": "Mistborn Era 2", "to": "Shadows of Self\n"}, {"from": "Mistborn Era 2", "to": "The Bands of Mourning\n"}, {"from": "Mistborn Era 2", "to": "The Lost Metal\n"}, {"from": "Arcanum Unbounded", "to": "The Hope of Elantris\n"}, {"from": "Arcanum Unbounded", "to": "The Eleventh Metal\n"}, {"from": "Arcanum Unbounded", "to": "The Emperor\u0027s Soul\n"}, {"from": "Arcanum Unbounded", "to": "Allomancer Jak and the Pits of Eltania\n"}, {"from": "Arcanum Unbounded", "to": "White Sand\n"}, {"from": "Arcanum Unbounded", "to": "Shadows for Silence in the Forests of Hell\n"}, {"from": "Arcanum Unbounded", "to": "Sixth of Dusk\n"}, {"from": "Arcanum Unbounded", "to": "Mistborn: Secret History"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
