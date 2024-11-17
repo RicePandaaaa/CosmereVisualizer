@@ -88,8 +88,8 @@
                   
 
                   // parsing and collecting nodes and edges from the python
-                  nodes = new vis.DataSet([{"color": "#ff5733", "id": "Standalones", "label": "Standalones", "shape": "dot"}, {"color": "#33cfff", "id": "Elantris\n", "label": "Elantris\n", "shape": "dot"}, {"color": "#33cfff", "id": "Warbreaker\n", "label": "Warbreaker\n", "shape": "dot"}, {"color": "#33cfff", "id": "Tress of the Emerald Sea\n", "label": "Tress of the Emerald Sea\n", "shape": "dot"}, {"color": "#33cfff", "id": "Yumi and the Nightmare Painter\n", "label": "Yumi and the Nightmare Painter\n", "shape": "dot"}, {"color": "#33cfff", "id": "Sunlit main\n", "label": "Sunlit main\n", "shape": "dot"}]);
-                  edges = new vis.DataSet([{"from": "Standalones", "to": "Elantris\n"}, {"from": "Standalones", "to": "Warbreaker\n"}, {"from": "Standalones", "to": "Tress of the Emerald Sea\n"}, {"from": "Standalones", "to": "Yumi and the Nightmare Painter\n"}, {"from": "Standalones", "to": "Sunlit main\n"}]);
+                  nodes = new vis.DataSet([{"color": "#ff5733", "id": "Standalones", "label": "Standalones", "shape": "dot"}, {"color": "#33cfff", "id": "Elantris", "label": "Elantris", "shape": "dot"}, {"color": "#33cfff", "id": "Warbreaker", "label": "Warbreaker", "shape": "dot"}, {"color": "#33cfff", "id": "Tress of the Emerald Sea", "label": "Tress of the Emerald Sea", "shape": "dot"}, {"color": "#33cfff", "id": "Yumi and the Nightmare Painter", "label": "Yumi and the Nightmare Painter", "shape": "dot"}, {"color": "#33cfff", "id": "Sunlit Man", "label": "Sunlit Man", "shape": "dot"}]);
+                  edges = new vis.DataSet([{"from": "Standalones", "to": "Elantris"}, {"from": "Standalones", "to": "Warbreaker"}, {"from": "Standalones", "to": "Tress of the Emerald Sea"}, {"from": "Standalones", "to": "Yumi and the Nightmare Painter"}, {"from": "Standalones", "to": "Sunlit Man"}]);
 
                   nodeColors = {};
                   allNodes = nodes.get({ returnType: "Object" });
@@ -151,5 +151,15 @@
               }
               drawGraph();
         </script>
-    </body>
+    
+        <script type="text/javascript">
+            network.on("click", function (params) {
+                if (params.nodes.length > 0) {
+                    const nodeId = String(params.nodes[0]).trim();
+                    window.parent.postMessage(nodeId, "*");
+                }
+            });
+        </script>
+        
+</body>
 </html>

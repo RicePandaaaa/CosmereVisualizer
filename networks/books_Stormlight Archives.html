@@ -88,8 +88,8 @@
                   
 
                   // parsing and collecting nodes and edges from the python
-                  nodes = new vis.DataSet([{"color": "#ff5733", "id": "Stormlight Archives", "label": "Stormlight Archives", "shape": "dot"}, {"color": "#33cfff", "id": "The Way of Kings\n", "label": "The Way of Kings\n", "shape": "dot"}, {"color": "#33cfff", "id": "Words of Radiance\n", "label": "Words of Radiance\n", "shape": "dot"}, {"color": "#33cfff", "id": "Edgedancer\n", "label": "Edgedancer\n", "shape": "dot"}, {"color": "#33cfff", "id": "Oathbringer\n", "label": "Oathbringer\n", "shape": "dot"}, {"color": "#33cfff", "id": "Dawnshard\n", "label": "Dawnshard\n", "shape": "dot"}, {"color": "#33cfff", "id": "Rhythm of Warbreaker\n", "label": "Rhythm of Warbreaker\n", "shape": "dot"}]);
-                  edges = new vis.DataSet([{"from": "Stormlight Archives", "to": "The Way of Kings\n"}, {"from": "Stormlight Archives", "to": "Words of Radiance\n"}, {"from": "Stormlight Archives", "to": "Edgedancer\n"}, {"from": "Stormlight Archives", "to": "Oathbringer\n"}, {"from": "Stormlight Archives", "to": "Dawnshard\n"}, {"from": "Stormlight Archives", "to": "Rhythm of Warbreaker\n"}]);
+                  nodes = new vis.DataSet([{"color": "#ff5733", "id": "Stormlight Archives", "label": "Stormlight Archives", "shape": "dot"}, {"color": "#33cfff", "id": "The Way of Kings", "label": "The Way of Kings", "shape": "dot"}, {"color": "#33cfff", "id": "Words of Radiance", "label": "Words of Radiance", "shape": "dot"}, {"color": "#33cfff", "id": "Edgedancer", "label": "Edgedancer", "shape": "dot"}, {"color": "#33cfff", "id": "Oathbringer", "label": "Oathbringer", "shape": "dot"}, {"color": "#33cfff", "id": "Dawnshard", "label": "Dawnshard", "shape": "dot"}, {"color": "#33cfff", "id": "Rhythm of War", "label": "Rhythm of War", "shape": "dot"}]);
+                  edges = new vis.DataSet([{"from": "Stormlight Archives", "to": "The Way of Kings"}, {"from": "Stormlight Archives", "to": "Words of Radiance"}, {"from": "Stormlight Archives", "to": "Edgedancer"}, {"from": "Stormlight Archives", "to": "Oathbringer"}, {"from": "Stormlight Archives", "to": "Dawnshard"}, {"from": "Stormlight Archives", "to": "Rhythm of War"}]);
 
                   nodeColors = {};
                   allNodes = nodes.get({ returnType: "Object" });
@@ -151,5 +151,15 @@
               }
               drawGraph();
         </script>
-    </body>
+    
+        <script type="text/javascript">
+            network.on("click", function (params) {
+                if (params.nodes.length > 0) {
+                    const nodeId = String(params.nodes[0]).trim();
+                    window.parent.postMessage(nodeId, "*");
+                }
+            });
+        </script>
+        
+</body>
 </html>

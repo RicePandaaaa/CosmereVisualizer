@@ -88,8 +88,8 @@
                   
 
                   // parsing and collecting nodes and edges from the python
-                  nodes = new vis.DataSet([{"color": "#ff5733", "id": "Mistborn Era 1", "label": "Mistborn Era 1", "shape": "dot"}, {"color": "#33cfff", "id": "Final Empire\n", "label": "Final Empire\n", "shape": "dot"}, {"color": "#33cfff", "id": "Well of Ascension\n", "label": "Well of Ascension\n", "shape": "dot"}, {"color": "#33cfff", "id": "Hero of Ages\n", "label": "Hero of Ages\n", "shape": "dot"}]);
-                  edges = new vis.DataSet([{"from": "Mistborn Era 1", "to": "Final Empire\n"}, {"from": "Mistborn Era 1", "to": "Well of Ascension\n"}, {"from": "Mistborn Era 1", "to": "Hero of Ages\n"}]);
+                  nodes = new vis.DataSet([{"color": "#ff5733", "id": "Mistborn Era 1", "label": "Mistborn Era 1", "shape": "dot"}, {"color": "#33cfff", "id": "Final Empire", "label": "Final Empire", "shape": "dot"}, {"color": "#33cfff", "id": "Well of Ascension", "label": "Well of Ascension", "shape": "dot"}, {"color": "#33cfff", "id": "Hero of Ages", "label": "Hero of Ages", "shape": "dot"}]);
+                  edges = new vis.DataSet([{"from": "Mistborn Era 1", "to": "Final Empire"}, {"from": "Mistborn Era 1", "to": "Well of Ascension"}, {"from": "Mistborn Era 1", "to": "Hero of Ages"}]);
 
                   nodeColors = {};
                   allNodes = nodes.get({ returnType: "Object" });
@@ -151,5 +151,15 @@
               }
               drawGraph();
         </script>
-    </body>
+    
+        <script type="text/javascript">
+            network.on("click", function (params) {
+                if (params.nodes.length > 0) {
+                    const nodeId = String(params.nodes[0]).trim();
+                    window.parent.postMessage(nodeId, "*");
+                }
+            });
+        </script>
+        
+</body>
 </html>

@@ -88,8 +88,8 @@
                   
 
                   // parsing and collecting nodes and edges from the python
-                  nodes = new vis.DataSet([{"color": "#ff5733", "id": "Arcanum Unbounded", "label": "Arcanum Unbounded", "shape": "dot"}, {"color": "#33cfff", "id": "The Hope of Elantris\n", "label": "The Hope of Elantris\n", "shape": "dot"}, {"color": "#33cfff", "id": "The Eleventh Metal\n", "label": "The Eleventh Metal\n", "shape": "dot"}, {"color": "#33cfff", "id": "The Emperor\u0027s Soul\n", "label": "The Emperor\u0027s Soul\n", "shape": "dot"}, {"color": "#33cfff", "id": "Allomancer Jak and the Pits of Eltania\n", "label": "Allomancer Jak and the Pits of Eltania\n", "shape": "dot"}, {"color": "#33cfff", "id": "White Sand\n", "label": "White Sand\n", "shape": "dot"}, {"color": "#33cfff", "id": "Shadows for Silence in the Forests of Hell\n", "label": "Shadows for Silence in the Forests of Hell\n", "shape": "dot"}, {"color": "#33cfff", "id": "Sixth of Dusk\n", "label": "Sixth of Dusk\n", "shape": "dot"}, {"color": "#33cfff", "id": "Mistborn: Secret History", "label": "Mistborn: Secret History", "shape": "dot"}]);
-                  edges = new vis.DataSet([{"from": "Arcanum Unbounded", "to": "The Hope of Elantris\n"}, {"from": "Arcanum Unbounded", "to": "The Eleventh Metal\n"}, {"from": "Arcanum Unbounded", "to": "The Emperor\u0027s Soul\n"}, {"from": "Arcanum Unbounded", "to": "Allomancer Jak and the Pits of Eltania\n"}, {"from": "Arcanum Unbounded", "to": "White Sand\n"}, {"from": "Arcanum Unbounded", "to": "Shadows for Silence in the Forests of Hell\n"}, {"from": "Arcanum Unbounded", "to": "Sixth of Dusk\n"}, {"from": "Arcanum Unbounded", "to": "Mistborn: Secret History"}]);
+                  nodes = new vis.DataSet([{"color": "#ff5733", "id": "Arcanum Unbounded", "label": "Arcanum Unbounded", "shape": "dot"}, {"color": "#33cfff", "id": "The Hope of Elantris", "label": "The Hope of Elantris", "shape": "dot"}, {"color": "#33cfff", "id": "The Eleventh Metal", "label": "The Eleventh Metal", "shape": "dot"}, {"color": "#33cfff", "id": "The Emperor\u0027s Soul", "label": "The Emperor\u0027s Soul", "shape": "dot"}, {"color": "#33cfff", "id": "Allomancer Jak and the Pits of Eltania", "label": "Allomancer Jak and the Pits of Eltania", "shape": "dot"}, {"color": "#33cfff", "id": "White Sand", "label": "White Sand", "shape": "dot"}, {"color": "#33cfff", "id": "Shadows for Silence in the Forests of Hell", "label": "Shadows for Silence in the Forests of Hell", "shape": "dot"}, {"color": "#33cfff", "id": "Sixth of Dusk", "label": "Sixth of Dusk", "shape": "dot"}, {"color": "#33cfff", "id": "Secret History (Mistborn)", "label": "Secret History (Mistborn)", "shape": "dot"}]);
+                  edges = new vis.DataSet([{"from": "Arcanum Unbounded", "to": "The Hope of Elantris"}, {"from": "Arcanum Unbounded", "to": "The Eleventh Metal"}, {"from": "Arcanum Unbounded", "to": "The Emperor\u0027s Soul"}, {"from": "Arcanum Unbounded", "to": "Allomancer Jak and the Pits of Eltania"}, {"from": "Arcanum Unbounded", "to": "White Sand"}, {"from": "Arcanum Unbounded", "to": "Shadows for Silence in the Forests of Hell"}, {"from": "Arcanum Unbounded", "to": "Sixth of Dusk"}, {"from": "Arcanum Unbounded", "to": "Secret History (Mistborn)"}]);
 
                   nodeColors = {};
                   allNodes = nodes.get({ returnType: "Object" });
@@ -151,5 +151,15 @@
               }
               drawGraph();
         </script>
-    </body>
+    
+        <script type="text/javascript">
+            network.on("click", function (params) {
+                if (params.nodes.length > 0) {
+                    const nodeId = String(params.nodes[0]).trim();
+                    window.parent.postMessage(nodeId, "*");
+                }
+            });
+        </script>
+        
+</body>
 </html>
