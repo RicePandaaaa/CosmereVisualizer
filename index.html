@@ -70,6 +70,8 @@
             </div>
             <!-- Network Viewer -->
             <iframe id="networkFrame" class="w-full h-[600px] border-none bg-white" src=""></iframe>
+            <!-- Text Viewer -->
+            <iframe id="textFrame" class="w-full h-[200px] border-none bg-[var(--space-accent)] text-[var(--space-text)]"></iframe>
         </div>
     </section>
 
@@ -80,6 +82,7 @@
         const categoryDropdown = document.getElementById('category');
         const graphDropdown = document.getElementById('graph');
         const networkFrame = document.getElementById('networkFrame');
+        const textFrame = document.getElementById('textFrame');
 
         menuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
@@ -94,6 +97,16 @@
 
         categoryDropdown.addEventListener('change', updateNetworkFrame);
         graphDropdown.addEventListener('change', updateNetworkFrame);
+
+        // Update text based on selected node
+        window.addEventListener('message', (event) => {
+            const nodeId = event.data; // Use the raw data directly
+            if (JSON.stringify(nodeId)[0] != "{") {
+                console.log(typeof(nodeId))
+                textFrame.src = `texts/${category.value}/${graph.value}/${nodeId}.html`; // Dynamically load the correct text file
+            }
+        });
+
     </script>
 </body>
 </html>
