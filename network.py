@@ -80,7 +80,7 @@ def generate_filler_file(file_path: str, header_text: str=""):
     lorem_text = f"""
     <html>
     <head><title></title></head>
-    <body>
+    <body style="color: white;">
         <h1>{header_text}</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
         Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
