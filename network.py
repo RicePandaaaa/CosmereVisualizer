@@ -25,8 +25,7 @@ def create_network(terms: dict[str, List[str]], category_name: str):
         # Create text HTML file for main term
         os.makedirs(f"texts/{category_name}/{main_term}", exist_ok=True)
         text_file_path = f"texts/{category_name}/{main_term}/{main_term}.html"
-        with open(text_file_path, "w") as text_file:
-            pass
+        generate_filler_file(text_file_path, main_term)
 
         # Join the terms together
         for sub_term in sub_terms:
@@ -35,8 +34,7 @@ def create_network(terms: dict[str, List[str]], category_name: str):
 
             # Create the accompanying text HTML file
             text_file_path = f"texts/{category_name}/{main_term}/{sub_term}.html"
-            with open(text_file_path, "w") as text_file:
-                pass
+            generate_filler_file(text_file_path, sub_term)
 
         # Create the HTML file
         file_path = f"networks/{category_name}_{main_term}.html"
@@ -64,6 +62,37 @@ def create_network(terms: dict[str, List[str]], category_name: str):
         # Write back the updated HTML
         with open(file_path, "w") as html_file:
             html_file.write(updated_html)
+
+
+def generate_filler_file(file_path: str, header_text: str=""):
+    """
+    Generates an empty HTML file at the location described by the file path
+    and fills the contents with barebones HTML and lorem ipsum text
+
+    Args:
+        file_path (str): Path of the file (includes the name of the file itself)
+        header_text (str): Text to place in the h1 header (defaults to nothing if none given)
+
+    Returns:
+        None
+    """
+
+    lorem_text = f"""
+    <html>
+    <head><title></title></head>
+    <body>
+        <h1>{header_text}</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+        nisi ut aliquip ex ea commodo consequat.</p>
+    </body>
+    </html>
+    """
+
+    with open(file_path, "w") as text_file:
+        text_file.write(lorem_text)
+
 
 # For generating the graphs
 if __name__ == "__main__":
